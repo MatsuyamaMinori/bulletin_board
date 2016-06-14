@@ -55,14 +55,14 @@ public class NewCommentServlet extends HttpServlet {
 
 			new CommentService().register(comment);
 			if(StringUtils.isBlank(category) && StringUtils.isBlank(beforeYear) && StringUtils.isBlank(afterYear)){
-				compMessage.add("【件名】　"+request.getParameter("titel")+"　の投稿にコメントしました。");
+				compMessage.add("〈件名〉　"+request.getParameter("titel")+"　の投稿にコメントしました。");
 				session.setAttribute("compMessages", compMessage);
 				response.sendRedirect("top");
 			} else {
 				if(!StringUtils.isBlank(category)){
 					encodeStr = URLEncoder.encode(category,"utf-8");
 				}
-				compMessage.add("【件名】　"+request.getParameter("title")+"　の投稿にコメントが送りました。");
+				compMessage.add("〈件名〉　"+request.getParameter("title")+"　の投稿にコメントが送りました。");
 				session.setAttribute("compMessages", compMessage);
 				response.sendRedirect("top?categorySearch=" + encodeStr
 						+ "&beforeYear=" + beforeYear + "&beforeManth=" + beforeManth + "&beforeDate=" + beforeDate

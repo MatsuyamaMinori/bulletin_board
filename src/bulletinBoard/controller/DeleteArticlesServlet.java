@@ -52,14 +52,14 @@ public class DeleteArticlesServlet extends HttpServlet {
 			new CommentService().delete(Integer.parseInt(request.getParameter("articleId")));
 
 			if(StringUtils.isBlank(category) && StringUtils.isBlank(beforeYear) && StringUtils.isBlank(afterYear)){
-				compMessage.add("【件名】　"+request.getParameter("titel")+"　の投稿を削除しました。");
+				compMessage.add("〈件名〉　"+request.getParameter("titel")+"　の投稿を削除しました。");
 				session.setAttribute("compMessages", compMessage);
 				response.sendRedirect("top");
 			} else {
 				if(!StringUtils.isBlank(category)){
 					encodeStr = URLEncoder.encode(category,"utf-8");
 				}
-				compMessage.add("【件名】　"+request.getParameter("titel")+"　の投稿を削除しました。");
+				compMessage.add("〈件名〉　"+request.getParameter("titel")+"　の投稿を削除しました。");
 				session.setAttribute("compMessages", compMessage);
 				response.sendRedirect("top?categorySearch=" + encodeStr
 						+ "&beforeYear=" + beforeYear + "&beforeManth=" + beforeManth + "&beforeDate=" + beforeDate

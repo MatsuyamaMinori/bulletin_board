@@ -48,7 +48,7 @@ public class NewArticlesServlet extends HttpServlet {
 			if (isValid(request, messages) == true) {
 
 			new ArticlesService().register(article);
-			compMessage.add("【件名】　"+request.getParameter("titel")+"　の投稿が完了しました。");
+			compMessage.add("〈件名〉　"+request.getParameter("titel")+"　の投稿が完了しました。");
 			session.setAttribute("compMessages", compMessage);
 			response.sendRedirect("top");
 

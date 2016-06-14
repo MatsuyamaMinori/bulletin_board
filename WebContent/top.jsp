@@ -97,9 +97,10 @@
 
 		<div class="articles">
 			<div class="id">No.<c:out value="${article.getId()}" /></div><br/>
-			<div class="category">【投稿の種類】<c:out value="${article.getCategory()}" /></div><br/>
-			<div class="titel">【件名】<c:out value="${article.getTitel()}" /></div><br/>
-			<div class="text">【本文】<br/><pre><c:out value="${article.getText()}" /></pre></div><br/>
+			<div class="category">〈投稿の種類〉　<c:out value="${article.getCategory()}" /></div><br/>
+			<div class="titel"><b>〈件名〉　<c:out value="${article.getTitel()}" /></b></div><br/>
+			<hr width="100%" align="left">
+			<div class="text"><pre><c:out value="${article.getText()}" /></pre></div><br/>
 			<div class="user">投稿者[　<c:out value="${article.getName()}" />　]</div>
 			<div class="date">投稿日時：<fmt:formatDate value="${article.getInsertDate()}"
 			 pattern="yyyy年MM月dd日 HH:mm:ss" /></div>
@@ -135,7 +136,7 @@
 		<hr width="100%" align="left">
 
 		コメント（500文字まで）
-		<hr width="65%" align="left">
+		<hr width="65%" align="left"><br/>
 
 		<form action="newComment" method="post">
 			<input name="articleId" value="${article.getId()}" type="hidden" id="articleId"/>
