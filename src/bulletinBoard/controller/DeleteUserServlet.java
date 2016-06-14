@@ -26,11 +26,13 @@ public class DeleteUserServlet extends HttpServlet {
 		List<String> messages = new ArrayList<String>();
 		List<String> compMessage = new ArrayList<String>();
 		User user = (User) request.getSession().getAttribute("loginUser");
+		String name = request.getParameter("name");
+		System.out.println(name);
 
 		if(user.getId() != Integer.parseInt(request.getParameter("userId"))){
 			new UserService().delete(Integer.parseInt(request.getParameter("userId")));
 
-			compMessage.add(request.getParameter("name")+"のユーザー情報を削除しました。");
+			compMessage.add(name+"のユーザー情報を削除しました。");
 			session.setAttribute("compMessages", compMessage);
 
 			response.sendRedirect("managementUsers");

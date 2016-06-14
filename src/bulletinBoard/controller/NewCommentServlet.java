@@ -34,7 +34,7 @@ public class NewCommentServlet extends HttpServlet {
 			User user = (User) session.getAttribute("loginUser");
 
 			Comment comment = new Comment();
-			comment.setText(request.getParameter("text"));
+			comment.setText(request.getParameter("commenttext"));
 			comment.setUserId(user.getId());
 			comment.setArticleId(Integer.parseInt(request.getParameter("articleId")));
 
@@ -89,13 +89,13 @@ public class NewCommentServlet extends HttpServlet {
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 
-		String text = request.getParameter("text");
+		String text = request.getParameter("commenttext");
 
 		if (StringUtils.isBlank(text) == true) {
-			messages.add("コメントを入力してください");
+			messages.add("コメントを入力してください。");
 		}
 		if (500 < text.length()) {
-			messages.add("500文字以下で入力してください");
+			messages.add("500文字以下で入力してください。");
 		}
 		if (messages.size() == 0) {
 			return true;

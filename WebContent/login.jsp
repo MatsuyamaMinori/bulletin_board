@@ -10,10 +10,9 @@
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="main-contents">
 
 <h1>BSG掲示板へようこそ！</h1>
-
+<div class="loginform">
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -21,20 +20,22 @@
 				<li><c:out value="${message}" />
 			</c:forEach>
 		</ul>
+		<hr size="10" color="#FFFF77">
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 
-<form action="login" method="post"><br />
+<form action="login" method="post">
 	<label for="loginId">ログインID</label>
-	<input name="loginId" value="${inputUser.getLoginId()}" id="loginId"/> <br />
+	<input name="loginId" value="${inputUser.getLoginId()}" id="loginId"/> <br /><br />
 
 	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/> <br />
+	<input name="password" type="password" id="password"/> <br /><br />
 
 	<input type="submit" value="ログイン" /> <br />
 </form>
-<div class="copyright">Copyright©Minori Matsuyama</div>
 </div>
+<div class="copyrightlogin">Copyright©Minori Matsuyama</div>
+
 </body>
 </html>

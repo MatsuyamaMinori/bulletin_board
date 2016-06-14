@@ -30,6 +30,7 @@ public class StopedUserServlet extends HttpServlet {
 
 		if(user.getId() != Integer.parseInt(request.getParameter("userId"))){
 			compMessage.add(request.getParameter("name")+"のユーザー機能が停止しました。");
+			System.out.println("名前："+request.getParameter("name"));
 			session.setAttribute("compMessages", compMessage);
 
 			response.sendRedirect("managementUsers");

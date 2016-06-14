@@ -14,7 +14,7 @@
 <h1>BSG掲示板</h1>
 
 <div class="header">
-		<a href="newArticles.jsp">新規投稿</a>　　
+		<a href="newArticles">新規投稿</a>　　
 		<c:if test="${authorityTransition}">
 			<a href="managementUsers">ユーザー管理</a>　　
 		</c:if>
@@ -35,7 +35,7 @@
 <div class="search">
 <form action="top" method="get">
 <br/>
-　投稿の種類で検索する：<select name="categorySearch">
+投稿の種類で検索する：<select name="categorySearch">
 	<option value="all">全て見る</option>
 	<c:forEach items="${categories}" var="categories">
 	<c:if test="${search.category == categories}">
@@ -46,14 +46,25 @@
 	</c:if>
 	</c:forEach>
 </select><br/><br/>
-<label for="date">　日付で検索する(例　2016年3月30日):</label>
-　<input name="beforeYear" value="${search.year1}" id="beforeYear" size="4" maxlength="4"/>年<input name="beforeManth" value="${search.month1}" id="beforeManth" size="2" maxlength="2"/>月
-<input name="beforeDate" value="${search.date1}" id="beforeDate" size="2" maxlength="2"/>日から<input name="afterYear" value="${search.year2}" id="afterYear" size="4" maxlength="4"/>年
-<input name="afterManth" value="${search.month2}" id="afterManth" size="2" maxlength="2"/>月<input name="afterDate" value="${search.date2}" id="afterDate" size="2" maxlength="2"/>日まで<br /><br/>
-　・カテゴリー、日付検索はどちらか一方のみ入力でも検索可能です。<br />
-　・日付検索をする場合は年月日は必須記入です。なお、前後の日付どちらか片方が揃っていれば検索は可能です。<br />
-　<input type="submit" value="検索する" /></form>
-<br/>
+<label for="date">日付で検索する(例　2016年3月30日)：
+<input name="beforeYear" value="${search.year1}" id="beforeYear" size="4" maxlength="4"/>年 <input name="beforeManth" value="${search.month1}" id="beforeManth" size="2" maxlength="2"/>月
+<input name="beforeDate" value="${search.date1}" id="beforeDate" size="2" maxlength="2"/>日 から <input name="afterYear" value="${search.year2}" id="afterYear" size="4" maxlength="4"/>年
+<input name="afterManth" value="${search.month2}" id="afterManth" size="2" maxlength="2"/>月 <input name="afterDate" value="${search.date2}" id="afterDate" size="2" maxlength="2"/> 日まで
+</label><br />
+・投稿の種類、日付検索はどちらか一方のみ入力でも検索可能です。<br />
+・日付検索をする場合は年月日は必須記入です。なお、前後の日付どちらか片方が揃っていれば検索は可能です。<br /><br />
+<input type="submit" value="検索する" /></form>
+<c:if test="${ not empty searchMessages }">
+		<div class="searchMessages">
+		<hr size="10" color="#FFFF77">
+			<ul>
+				<c:forEach items="${searchMessages}" var="searchMessages">
+					<li><c:out value="${searchMessages}" />
+				</c:forEach>
+			</ul>
+		</div>
+		<c:remove var="searchMessages" scope="session"/>
+		</c:if>
 </div>
 <div class="main-contents">
 	<c:if test="${ not empty errorMessages }">
@@ -107,7 +118,7 @@
 				<input name="afterYear" value="${search.year2}" type="hidden" id="afterYear"/>
 				<input name="afterManth" value="${search.month2}" type="hidden" id="afterManth"/>
 				<input name="afterDate" value="${search.date2}" type="hidden" id="afterDate"/>
-				　<input type="submit" value="投稿削除">
+				<input type="submit" value="投稿削除">
 			</form>
 			<script>
 				function deleteAticle(){
@@ -119,9 +130,12 @@
 					}
 				}
 			</script>
-			<br/><br/>
+			<br/>
 		</c:if>
-		<hr width="75%" align="left"><br/>
+		<hr width="100%" align="left">
+
+		コメント（500文字まで）
+		<hr width="65%" align="left">
 
 		<form action="newComment" method="post">
 			<input name="articleId" value="${article.getId()}" type="hidden" id="articleId"/>
@@ -133,19 +147,19 @@
 			<input name="afterYear" value="${search.year2}" type="hidden" id="afterYear"/>
 			<input name="afterManth" value="${search.month2}" type="hidden" id="afterManth"/>
 			<input name="afterDate" value="${search.date2}" type="hidden" id="afterDate"/>
-			<div class="commentNew">コメント（500文字まで）<br />
-			<textarea name="text" cols="40" rows="15" maxlength="20" class="text"><c:out value="${error.text}" /></textarea>
+			<div class="commentNew">
+			<textarea name="commenttext" cols="40" rows="15" maxlength="500" class="commenttext"><c:out value="${error.text}" /></textarea>
 			<br /></div>
-			　<input type="submit" value="コメントを送る"><br /><br />
-		</form>
+			<input type="submit" value="コメントを送る"><br /><br />
+		</form><hr width="65%" align="left">
 
 		<c:forEach items="${comment}" var="comment">
 			<c:if test="${comment.getArticleId() == article.getId()}">
 				<div class="comment">
-				<div class="text">〔コメント〕<br/><pre><c:out value="${comment.getText()}"/></pre></div><br/>
+				<div class="commenttext"><pre><c:out value="${comment.getText()}"/></pre></div><br/>
 				<div class="user">投稿者[　<c:out value="${comment.getName()}" />　]</div>
 				<div class="date">投稿日時：<fmt:formatDate value="${comment.getInsertDate()}" pattern="yyyy年MM月dd日 HH:mm:ss" /></div>
-
+<br/>
 			<c:if test ="${ deleteAll || comment.getBranchId() == loginUser.getBranchId() && deleteBranch || (comment.getUserId() == loginUser.getId())}">
 			<form method="post" action="deleteComment" onSubmit="return deleteCommentOnly()">
 				<input name="commentId" value="${comment.getId()}" type="hidden" id="commentId"/>
@@ -160,7 +174,7 @@
 				<input name="afterYear" value="${search.year2}" type="hidden" id="afterYear"/>
 				<input name="afterManth" value="${search.month2}" type="hidden" id="afterManth"/>
 				<input name="afterDate" value="${search.date2}" type="hidden" id="afterDate"/>
-				　<input type="submit" value="コメント削除">
+				<input type="submit" value="コメント削除">
 			</form>
 			<script>
 				function deleteCommentOnly(){
@@ -174,7 +188,7 @@
 			</script>
 			</c:if>
 
-			</div><br/><hr width="50%" align="left">
+			</div><br/><hr width="65%" align="left">
 			</c:if>
 		</c:forEach><hr size="10" color="#FFFF77">
 

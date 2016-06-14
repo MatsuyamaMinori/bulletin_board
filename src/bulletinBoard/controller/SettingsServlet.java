@@ -146,52 +146,49 @@ public class SettingsServlet extends HttpServlet {
 		int jobTitleId = Integer.parseInt(request.getParameter("jobTitleId"));
 		int id = Integer.parseInt(request.getParameter("userId"));
 
-		if (StringUtils.isBlank(loginId) == true) {
-			messages.add("ログインIDを入力してください");
-		}
-		if (!loginId.matches("^\\w{6,20}$")) {
-			messages.add("ログインIDは半角英数字6文字以上20文字以内で入力してください");
+		if (StringUtils.isBlank(loginId) || !loginId.matches("^\\w{6,20}$")) {
+			messages.add("ログインIDは半角英数字6文字以上20文字以内で入力してください。");
 		}
 		UserCheckService userCheckService = new UserCheckService();
 		User existLoginId = userCheckService.userCheckId(loginId);
 		if(existLoginId == null){
 		} else if(id != existLoginId.getId()) {
-			messages.add("このログインIDは既に使われています");
+			messages.add("このログインIDは既に使われています。");
 		}
 
 		if (StringUtils.isBlank(name) == true) {
-			messages.add("アカウント名を入力してください");
+			messages.add("ユーザー名を入力してください。");
 		}
 		if (10 < name.length()) {
-			messages.add("アカウント名は10文字以下で入力してください。");
+			messages.add("ユーザー名は10文字以下で入力してください。");
 		}
 
 		if(StringUtils.isBlank(password) && !StringUtils.isBlank(checkpassword)){
 			messages.add("パスワードも入力してください");
 		}
 		if (!StringUtils.isBlank(password) && !password.matches("^\\w{6,255}$")) {
-			messages.add("パスワードは半角英数字6文字以上255文字以内で入力してください");
+			messages.add("パスワードは半角英数字6文字以上255文字以内で入力してください。");
 		}
 		User existPassword = userCheckService.userCheckPassword(password);
 		if(existPassword == null){
 		} else if(id != existPassword.getId()){
-			messages.add("このパスワードは既に使われています");
+			messages.add("このパスワードは既に使われています。");
 		}
 		if((!StringUtils.isBlank(password) && StringUtils.isBlank(checkpassword))||!password.equals(checkpassword)){
-			messages.add("パスワードと確認用パスワードが一致しません");
+			messages.add("パスワードと確認用パスワードが一致しません。");
 		}
 
 		if(branchId == 0){
-			messages.add("所属の項目を選択してください");
+			messages.add("所属の項目を選択してください。");
 		}
 		if(jobTitleId == 0){
-			messages.add("役職の項目を選択してください");
+			messages.add("役職の項目を選択してください。");
 		}
 		if(branchId == 1 && jobTitleId >= 3){
 			messages.add("本社勤務者は役職に総務人事担当、情報管理担当以外はは選べません。");
 		}
 		if(branchId >= 2 && jobTitleId <= 2){
-			messages.add("支店勤務者は役職に支店長、支店社員以外は選べません。");
+			messages.add("支店勤務者は役職に支店長、社員以外は選べません。");
 		}
 
 		if (messages.size() == 0) {

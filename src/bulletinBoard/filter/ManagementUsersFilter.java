@@ -56,7 +56,7 @@ public class ManagementUsersFilter implements Filter{
 
 		if ((uri.equals(contextPath + "/managementUsers") || uri.equals(contextPath + "/signup") || uri.equals(contextPath + "/settings"))
 				&& (user.getJobTitleId() != 1 || user == null)){
-			authorityMessages.add("権限がありません");
+			authorityMessages.add("権限がありません。");
 			session.setAttribute("authorityMessages", authorityMessages);
 
 			((HttpServletResponse)response).sendRedirect("top");

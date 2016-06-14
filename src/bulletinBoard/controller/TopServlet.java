@@ -69,6 +69,7 @@ public class TopServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		List<String> messages = new ArrayList<String>();
+		List<String> searchMessages = new ArrayList<String>();
 
 		String category = request.getParameter("categorySearch");
 		String beforeYear = request.getParameter("beforeYear");
@@ -132,8 +133,8 @@ public class TopServlet extends HttpServlet {
 						request.setAttribute("search",search );
 					}
 				} else {
-					messages.add("日付の入力が前と後で逆になっています。");
-					session.setAttribute("errorMessages", messages);
+					searchMessages.add("日付の入力が前と後で逆になっています。");
+					session.setAttribute("searchMessages", searchMessages);
 					request.setAttribute("search",search );
 				}
 			}catch (ParseException e) {
@@ -173,8 +174,8 @@ public class TopServlet extends HttpServlet {
 			}
 
 		} else {
-			messages.add("日付検索の年月日は必須です。");
-			session.setAttribute("errorMessages", messages);
+			searchMessages.add("日付検索の年月日は必須です。");
+			session.setAttribute("searchMessages", searchMessages);
 			List<UsersArticles> categoryArticles = new ArticlesService().getCategoryArticles
 					(category,"2016","0","0",strY,strM,strD);
 			request.setAttribute("article", categoryArticles);

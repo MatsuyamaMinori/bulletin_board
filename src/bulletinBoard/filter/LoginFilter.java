@@ -56,7 +56,7 @@ public class LoginFilter implements Filter{
 		} else if(session == null || session.getAttribute("loginUser") == null) {
 
 //			session.setAttribute("target", uri);
-			messages.add("セッションが切れました。ログインをお願いします。");
+			messages.add("ログインしてください。");
 			session.setAttribute("errorMessages", messages);
 
 			((HttpServletResponse)response).sendRedirect("login");

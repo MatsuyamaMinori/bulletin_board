@@ -31,20 +31,19 @@
 <form action="settings" method="post"><br />
 	<label for="loginId">ログインID（半角英数字6文字以上20文字以内）</label>
 	<input name="loginId" value="${settingUser.loginId}" id="loginId"/> <br />
-
-	<label for="name">アカウント名（10文字以下）</label>
+<br />
+	<label for="name">ユーザー名（10文字以下）</label>
 	<input name="name" value="${settingUser.name}" id="name"/><br />
-
+<br />
 	<label for="password">パスワード（記号を含む半角文字6文字以上255文字以下）＊変更しない場合、入力の必要はありません。</label>
 	<input name="password" type="password" id="password"/> <br />
-
-	<label for="checkPassword">確認のため、パスワードをもう一度入力してください。＊パスワードを変更しない場合、入力の必要はありません。</label>
-	<input name="checkPassword" type="password" id="checkPassword"/> <br />
 <br />
+	<label for="checkPassword">確認のため、パスワードをもう一度入力してください。＊パスワードを変更しない場合、入力の必要はありません。</label>
+	<input name="checkPassword" type="password" id="checkPassword"/> <br /><br />
 <c:if test="${loginUser.getId() != settingUser.getId()}">
-所属
+所属<br />
 <select name="branchId">
-	<option value=0>選択してください。</option>
+	<option value=0>選択してください</option>
 	<c:forEach items="${branches}" var="branches">
 	<c:if test="${settingUser.branchId == branches.getBranchId()}">
 		<option value="${branches.getBranchId()}" selected><c:out value="${branches.getBranchName()}"></c:out></option></c:if>
@@ -53,10 +52,9 @@
 	</c:forEach>
 </select><br/>
 <br />
-
-役職
+役職<br />
 <select name="jobTitleId">
-	<option value=0>選択してください。</option>
+	<option value=0>選択してください</option>
 	<c:forEach items="${JobTitles}" var="JobTitles">
 	<c:if test="${settingUser.jobTitleId == JobTitles.getJobTitleId()}">
 		<option value="${JobTitles.getJobTitleId()}" selected><c:out value="${JobTitles.getJobTitleName()}"></c:out></option></c:if>
@@ -73,8 +71,8 @@
 <input name="userId" value="${settingUser.getId()}" type="hidden" id="userId"/>
 	<input type="submit" value="登録" /> <br />
 
-</form>
+</form></div>
 <div class="copyright">Copyright©Minori Matsuyama</div>
-</div>
+
 </body>
 </html>
