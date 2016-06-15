@@ -62,7 +62,7 @@ public class NewCommentServlet extends HttpServlet {
 				if(!StringUtils.isBlank(category)){
 					encodeStr = URLEncoder.encode(category,"utf-8");
 				}
-				compMessage.add("〈件名〉　"+request.getParameter("title")+"　の投稿にコメントが送りました。");
+				compMessage.add("〈件名〉　"+request.getParameter("titel")+"　の投稿にコメントしました。");
 				session.setAttribute("compMessages", compMessage);
 				response.sendRedirect("top?categorySearch=" + encodeStr
 						+ "&beforeYear=" + beforeYear + "&beforeManth=" + beforeManth + "&beforeDate=" + beforeDate
@@ -94,7 +94,9 @@ public class NewCommentServlet extends HttpServlet {
 		if (StringUtils.isBlank(text) == true) {
 			messages.add("コメントを入力してください。");
 		}
-		if (500 < text.length()) {
+		int linefeed = text.split("\n").length;
+		int linefeedA = (linefeed - 1)*2;
+		if (500 < text.length()-linefeedA) {
 			messages.add("500文字以下で入力してください。");
 		}
 		if (messages.size() == 0) {

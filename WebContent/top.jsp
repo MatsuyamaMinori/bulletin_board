@@ -35,7 +35,7 @@
 <div class="search">
 <form action="top" method="get">
 <br/>
-投稿の種類で検索する：<select name="categorySearch">
+カテゴリーで検索する：<select name="categorySearch">
 	<option value="all">全て見る</option>
 	<c:forEach items="${categories}" var="categories">
 	<c:if test="${search.category == categories}">
@@ -51,8 +51,9 @@
 <input name="beforeDate" value="${search.date1}" id="beforeDate" size="2" maxlength="2"/>日 から <input name="afterYear" value="${search.year2}" id="afterYear" size="4" maxlength="4"/>年
 <input name="afterManth" value="${search.month2}" id="afterManth" size="2" maxlength="2"/>月 <input name="afterDate" value="${search.date2}" id="afterDate" size="2" maxlength="2"/> 日まで
 </label><br />
-・投稿の種類、日付検索はどちらか一方のみ入力でも検索可能です。<br />
-・日付検索をする場合は年月日は必須記入です。なお、前後の日付どちらか片方が揃っていれば検索は可能です。<br /><br />
+・カテゴリー、日付検索はどちらか一方のみ入力でも検索可能です。<br />
+・日付検索をする場合は年月日は必須記入です。<br />
+・前後の日付どちらか片方が揃っていれば検索は可能です。<br /><br />
 <input type="submit" value="検索する" /></form>
 <c:if test="${ not empty searchMessages }">
 		<div class="searchMessages">
@@ -97,7 +98,7 @@
 
 		<div class="articles">
 			<div class="id">No.<c:out value="${article.getId()}" /></div><br/>
-			<div class="category">〈投稿の種類〉　<c:out value="${article.getCategory()}" /></div><br/>
+			<div class="category">〈カテゴリー〉　<c:out value="${article.getCategory()}" /></div><br/>
 			<div class="titel"><b>〈件名〉　<c:out value="${article.getTitel()}" /></b></div><br/>
 			<hr width="100%" align="left">
 			<div class="text"><pre><c:out value="${article.getText()}" /></pre></div><br/>
@@ -149,7 +150,7 @@
 			<input name="afterManth" value="${search.month2}" type="hidden" id="afterManth"/>
 			<input name="afterDate" value="${search.date2}" type="hidden" id="afterDate"/>
 			<div class="commentNew">
-			<textarea name="commenttext" cols="40" rows="15" maxlength="500" class="commenttext"><c:out value="${error.text}" /></textarea>
+			<textarea name="commenttext" cols="40" rows="15" class="commenttext"><c:out value="${error.text}" /></textarea>
 			<br /></div>
 			<input type="submit" value="コメントを送る"><br /><br />
 		</form><hr width="65%" align="left">
@@ -189,7 +190,7 @@
 			</script>
 			</c:if>
 
-			</div><br/><hr width="65%" align="left">
+			</div><hr width="65%" align="left">
 			</c:if>
 		</c:forEach><hr size="10" color="#FFFF77">
 

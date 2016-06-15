@@ -13,6 +13,7 @@
 	<style type="text/css">
 	.usersTable th {
 	background-color: #FFA500;
+	padding:3px 2px;
 	}
 	.usersTable {
 	text-align: center;
@@ -27,8 +28,8 @@
 <body>
 <h1>ユーザー管理</h1>
 <div class="header">
-		<a href="signup">新規ユーザー登録</a>
-		<span style="float: right"><a href="top">TOP画面に戻る</a></span>
+		<a href="signup">新規ユーザー登録</a>　
+		<a href="top">TOP画面に戻る</a>
 <br/>
 </div>
 <div class="main-contents">
@@ -62,7 +63,7 @@
 	<table class="usersTable" border=1>
 		<tr ><th width="100">ログインID</th><th width="150">ユーザー名</th>
 		<th width="100">所属</th><th width="100">役職</th>
-		<th width="50">停止・復活</th><th width="50">削除</th></tr>
+		<th width="50">機能</th><th width="50">削除</th></tr>
 
 		<c:forEach items="${user}" var="user">
 		<c:if test="${user.getStoped() == 1}">

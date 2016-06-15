@@ -44,7 +44,7 @@ public class DeleteCommentSurvlet extends HttpServlet {
 
 		User user = (User) session.getAttribute("loginUser");
 
-		if(user.getJobTitleId() != 2 ||(user.getId() == userId) ||
+		if(user.getJobTitleId() == 2 ||(user.getId() == userId) ||
 				(user.getJobTitleId() == 3 && branchId == user.getBranchId())){
 
 			new CommentService().deleteOnly(Integer.parseInt(request.getParameter("commentId")));

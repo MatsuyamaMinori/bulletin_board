@@ -14,7 +14,7 @@
 <h1>新規投稿</h1><br />
 
 <div class="header">
-<div class="back"><a href="top">TOP画面に戻る</a></div>
+<span style="float: left"><a href="top">TOP画面に戻る</a></span><br/>
 </div>
 <br />
 <div class="main-contents">
@@ -35,9 +35,9 @@
 		件名（50文字まで）<label for="titel"></label>
 		<input name="titel" value="${error.getTitel()}" size="50" maxlength="50" id="titel"/> <br /><br />
 		本文（1000文字まで）<br />
-		<textarea name="text" cols="80" rows="20" maxlength="500" class="text" id="text"><c:out value="${error.getText()}"/></textarea>
+		<textarea name="text" cols="80" rows="20" class="text" id="text"><c:out value="${error.getText()}"/></textarea>
 		<br /><br />
-		投稿の種類（10文字まで）<label for="category"></label>
+		カテゴリー（10文字まで）<label for="category"></label>
 		<input name="category" value="${error.getCategory()}" size="10" maxlength="10" id="category"/> <br />
 		<h4>＊全項目記入必須です。</h4>
 		<input type="submit" value="投稿する"><br /><br />

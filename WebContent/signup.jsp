@@ -12,7 +12,7 @@
 <body>
 <h1>新規ユーザー登録</h1>
 <div class="header">
-<span style="float: right"><a href="managementUsers">ユーザー管理画面に戻る</a></span>
+<span style="float: left"><a href="managementUsers">ユーザー管理画面に戻る</a></span>
 <br/>
 </div>
 <div class="main-contents">

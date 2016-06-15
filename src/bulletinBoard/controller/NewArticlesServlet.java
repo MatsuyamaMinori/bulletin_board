@@ -57,7 +57,6 @@ public class NewArticlesServlet extends HttpServlet {
 			request.setAttribute("error",article );
 
 			request.getRequestDispatcher("/newArticles.jsp").forward(request, response);
-//			response.sendRedirect("newArticles");
 		}
 	}
 
@@ -76,14 +75,16 @@ public class NewArticlesServlet extends HttpServlet {
 		if (StringUtils.isBlank(text) == true) {
 			messages.add("本文を入力してください。");
 		}
-		if (1000 < text.length()) {
+		int linefeed = text.split("\n").length;
+		int linefeedA = (linefeed - 1)*2;
+		if (1000 < text.length()-linefeedA) {
 			messages.add("本文を1000文字以下で入力してください。");
 		}
 		if (StringUtils.isBlank(category) == true) {
-			messages.add("投稿の種類を入力してください。");
+			messages.add("カテゴリーを入力してください。");
 		}
 		if (10 < category.length()) {
-			messages.add("投稿の種類を10文字以下で入力してください。");
+			messages.add("カテゴリーを10文字以下で入力してください。");
 		}
 		if (messages.size() == 0) {
 			return true;
